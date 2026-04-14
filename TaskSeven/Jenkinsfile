@@ -7,6 +7,7 @@ pipeline {
     }
 
     stages {
+
         stage('Build') {
             steps {
                 dir('TaskSeven') {
@@ -22,12 +23,13 @@ pipeline {
                         withCredentials([string(credentialsId: 'Task7-Token', variable: 'SONAR_TOKEN')]) {
                             bat """
                             mvn sonar:sonar ^
-                            -Dsonar.token=%SONAR_TOKEN%
+                            -Dsonar.login=%SONAR_TOKEN%
                             """
                         }
                     }
                 }
             }
         }
+
     }
 }
