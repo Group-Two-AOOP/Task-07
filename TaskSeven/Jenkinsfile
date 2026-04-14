@@ -19,7 +19,12 @@ pipeline {
             steps {
                 dir('TaskSeven') {
                     withSonarQubeEnv('SonarQube') {
-                        bat 'mvn sonar:sonar'
+                        withCredentials([string(credentialsId: 'Task7-Token', variable: 'SONAR_TOKEN')]) {
+                            bat """
+                            mvn sonar:sonar ^
+                            -Dsonar.token=%SONAR_TOKEN%
+                            """
+                        }
                     }
                 }
             }
