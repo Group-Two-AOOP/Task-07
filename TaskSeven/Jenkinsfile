@@ -2,10 +2,32 @@ node {
   stage('SCM') {
     checkout scm
   }
-  stage('SonarQube Analysis') {
-    def mvn = tool 'TaskSeven';
-    withSonarQubeEnv() {
-      sh "${mvn}/bin/mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Group-Two-AOOP_Task-07_TaskSeven_a82c5535-18b7-4ea4-9d6f-a5f0771c34d4 -Dsonar.projectName='TaskSeven'"
+pipeline {
+    agent any
+
+    tools {
+        jdk 'jdk17'
+        maven 'maven3'
     }
-  }
+
+    stages {
+        stage('Build') {
+            steps {
+                dir('TaskSeven') {
+                    sh 'mvn clean install'
+                }
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                dir('TaskSeven') {
+                    withSonarQubeEnv('SonarQube') {
+                        sh 'mvn sonar:sonar'
+                    }
+                }
+            }
+        }
+    }
+ }
 }
