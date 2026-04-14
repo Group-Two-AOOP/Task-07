@@ -23,7 +23,7 @@ pipeline {
                         withCredentials([string(credentialsId: 'Task7-Token', variable: 'SONAR_TOKEN')]) {
                             bat """
                             mvn sonar:sonar ^
-                            -Dsonar.login=%SONAR_TOKEN%
+                            -Dsonar.token=%SONAR_TOKEN%
                             """
                         }
                     }
