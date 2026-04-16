@@ -20,20 +20,20 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                bat 'mvn clean install'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
 
         stage('SonarCloud Analysis') {
             steps {
                 withSonarQubeEnv('SonarCloud') {
-                    sh """
+                    bat """
                     mvn sonar:sonar \
                       -Dsonar.organization=group-two-aoop
                       -Dsonar.projectKey=Group-Two-AOOP_Task-07
