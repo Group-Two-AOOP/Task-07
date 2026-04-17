@@ -7,7 +7,7 @@ pipeline {
 
     tools {
         jdk 'JDK17'
-        maven 'Maven3'
+        maven 'Maven-3'
     }
 
     stages {
@@ -30,9 +30,9 @@ pipeline {
             }
         }
 
-        stage('SonarCloud Analysis') {
+        stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarCloud') {
+                withSonarQubeEnv('SonarQube') {
                     bat """
                     mvn sonar:sonar \
                       -Dsonar.organization=group-two-aoop
