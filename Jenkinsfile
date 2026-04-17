@@ -34,11 +34,9 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     bat """
-                    mvn sonar:sonar \
-                      -Dsonar.organization=group-two-aoop
-                      -Dsonar.projectKey=Group-Two-AOOP_Task-07
-                      -Dsonar.host.url=http://localhost:9000
-                      -Dsonar.login=$SONAR_TOKEN
+                    mvn sonar:sonar
+                      -Dsonar.projectKey=Task7-Testing
+                      -Dsonar.token=$SONAR_TOKEN
                     """
                 }
             }
